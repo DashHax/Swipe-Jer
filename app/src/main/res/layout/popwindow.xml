@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pop_bg">
+
+
+    <TextView
+        android:id="@+id/TVProd_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30px"
+        android:paddingTop="30px"
+        android:text="TextView"
+        android:textColor="#070707"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif" />
+
+    <TextView
+        android:id="@+id/TVProd_Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TVProd_Title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-39dp"
+        android:text="TextView"
+        android:textColor="#0B0A0A"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif" />
+
+    <TextView
+        android:id="@+id/TVProd_desc"
+        android:layout_width="384dp"
+        android:layout_height="499dp"
+        android:layout_below="@+id/TVProd_Price"
+        android:layout_marginLeft="30px"
+        android:layout_marginStart="30px"
+        android:layout_marginTop="200px"
+        android:paddingLeft="40px"
+        android:text="Super Retina XDR display
+6.1‑inch (diagonal) all‑screen OLED display
+2532x1170-pixel resolution at 460 ppi
+
+HDR display
+True Tone
+Wide colour (P3)
+Haptic Touch
+2,000,000:1 contrast ratio (typical)
+800 nits max brightness (typical); 1,200 nits max brightness (HDR)
+Fingerprint-resistant oleophobic coating
+ Support for display of multiple languages and characters simultaneously
+
+Rated IP68 (maximum depth of 6 metres for up to 30 minutes) under IEC standard 60529
+
+"
+        android:textColor="#040404"
+        app:fontFamily="sans-serif" />
+</RelativeLayout>

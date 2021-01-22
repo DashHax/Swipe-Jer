@@ -31,6 +31,16 @@
             android:name=".RegisterActivity"
             android:label="childPage"
             android:parentActivityName=".LoginActivity"></activity>
+
+        <!--Pop up window-->
+        <activity android:name=".PopUpWindow" android:theme="@style/AppTheme.PopMe" />
+
+        <!-- Chat Page -->
+        <activity android:name=".Chat" />
+
+        <!-- Swipescreen Page -->
+        <activity android:name=".SwipeActivity" />
+
     </application>
 
 </manifest>
