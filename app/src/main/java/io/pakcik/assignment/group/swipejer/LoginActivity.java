@@ -53,6 +53,7 @@ public class LoginActivity  extends AppCompatActivity {
         //set click event of login button
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
 
                 //Check user input is correct or not
@@ -95,6 +96,7 @@ public class LoginActivity  extends AppCompatActivity {
 
                         //User Logged in Failed
                         Snackbar.make(buttonLogin, "Failed to log in , please try again", Snackbar.LENGTH_LONG).show();
+
 
                     }
                 }

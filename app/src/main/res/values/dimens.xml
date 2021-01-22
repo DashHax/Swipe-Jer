@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
@@ -13,3 +14,8 @@
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
 </resources>
+
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
+
