@@ -1,6 +1,7 @@
 package io.pakcik.assignment.group.swipejer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,12 +9,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +40,13 @@ public class SwipeActivity extends AppCompatActivity {
     List<cards> rowItems;
     Button reverse;
 
-
+    private String query;
     private String currentUId;
-    public static SQLiteHelper sqLiteHelper;
+    private static SQLiteHelper sqLiteHelper;
+
+    SharedPreferences shp;
+    private PopupMenu mPopupMenu;
+    SharedPreferences.Editor shpEditor;
 
 
 
@@ -54,8 +62,32 @@ public class SwipeActivity extends AppCompatActivity {
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems );
 
         // Select query
+        try {
+            String category = getIntent().getStringExtra("category");
+            Log.d("test",category);
+
+            query = "SELECT * FROM product WHERE category = '" + category+"'";
+            Log.d("test",query);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("test","No category");
+            query = "SELECT * FROM product";
+        }
+
+        try {
+            String name = getIntent().getStringExtra("name");
+            Log.d("test",name);
+
+            query = "SELECT * FROM PRODUCT WHERE (name LIKE '%"+ name+ "%')";
+            Log.d("test",query);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("test","No category");
+            query = "SELECT * FROM product";
+        }
+
         // Need to add logic for where clause
-        String query = "SELECT * FROM product";
+
 
         // get all data from sqlite
         Cursor cursor = SwipeActivity.sqLiteHelper.getData(query);
@@ -65,7 +97,7 @@ public class SwipeActivity extends AppCompatActivity {
             int user_id = cursor.getInt(1);
             String name = cursor.getString(2);
             String price = cursor.getString(3);
-            String description = cursor.getString(5);
+            String description = cursor.getString(4);
             byte[] image = cursor.getBlob(6);
 
             rowItems.add(new cards(user_id, name, price,description,image));
@@ -185,7 +217,72 @@ public class SwipeActivity extends AppCompatActivity {
             }
         });
 
+        // Click Swipejer button
+        Button swipejerbtn = (Button) findViewById(R.id.btnSwipeJer);
+        swipejerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), interestScreen.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton profileBtn = (ImageButton) findViewById(R.id.btnProfile);
+        // Popup menu
+        mPopupMenu = new PopupMenu(this, profileBtn);
+        MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.settings_menu, mPopupMenu.getMenu());
+        if (shp == null)
+            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupMenu.show();
+                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getTitle().equals("Profile")) {
+                            Intent profile = new Intent(SwipeActivity.this, UserProfileActivity.class);
+                            startActivity(profile);
+                        }
+
+
+                        else if (item.getTitle().equals("Logout")){
+                            try {
+                                if (shp == null)
+                                    shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+
+                                shpEditor = shp.edit();
+                                shpEditor.putString("name", "");
+                                shpEditor.putString("id", "");
+                                shpEditor.putString("email", "");
+                                shpEditor.putString("username", "");
+                                shpEditor.putString("password", "");
+
+                                shpEditor.commit();
+
+                                Intent i = new Intent(SwipeActivity.this, LoginActivity.class);
+                                startActivity(i);
+                                finish();
+
+                            } catch (Exception ex) {
+                                Toast.makeText(SwipeActivity.this, ex.getMessage().toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+
+
+
+
+                        return true;
+                    }
+                });
+            }
+        });
+
     }
+
 
     public void show_name() throws Exception {
         try {
