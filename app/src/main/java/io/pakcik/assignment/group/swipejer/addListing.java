@@ -2,6 +2,7 @@ package io.pakcik.assignment.group.swipejer;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -35,6 +36,7 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
     Button submitBtn;
     ImageView itemView1;
     final int REQUEST_CODE_GALLERY = 999;
+    SharedPreferences shp;
     public static SQLiteHelper sqLiteHelper;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,8 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         init();
-        sqLiteHelper = new SQLiteHelper(this, "ProductDB.sqlite", null, 1);
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS PRODUCT(Id INTEGER PRIMARY KEY AUTOINCREMENT, userID INT, name VARCHAR, price VARCHAR, description TEXT, category VARCHAR, image BLOB)");
-        sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.iphone));
-        sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Gadgets",drawableToByte(R.drawable.xiaomiredmi30));
-        sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Gadgets",drawableToByte(R.drawable.laptop));
+
+        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
 //        sqLiteHelper.queryData("DROP TABLE IF EXISTS PRODUCT");
 
         itemView1.setOnClickListener(new View.OnClickListener() {
@@ -66,14 +65,17 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
+        if (shp == null)
+            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
 
+        String user_id = shp.getString("id", "");
+        final int userid = Integer.parseInt(user_id);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("myTag", category);
                 try{
                     sqLiteHelper.insertData(
-                            userID,
+                            userid,
                             itemName.getText().toString().trim(),
                             itemPrice.getText().toString().trim(),
                             itemDesc.getText().toString().trim(),
@@ -91,16 +93,14 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
                 }
             }
         });
-    }
 
-    public byte[] drawableToByte(int image) {
-        Resources res = getResources();
-        Drawable drawable = res.getDrawable(image);
-        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] bitMapData = stream.toByteArray();
-        return bitMapData;
+        Button swipejer = (Button)findViewById(R.id.btnSwipeJer);
+        swipejer.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(addListing.this,SwipeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public static byte[] imageViewToByte(ImageView image) {

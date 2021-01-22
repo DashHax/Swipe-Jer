@@ -90,7 +90,7 @@ public class LoginActivity  extends AppCompatActivity {
                             shpEditor.commit();
 
 
-                            Intent i = new Intent(LoginActivity.this, UserProfileActivity.class);
+                            Intent i = new Intent(LoginActivity.this, interestScreen.class);
                             startActivity(i);
                             finish();
 
