@@ -17,7 +17,7 @@ public class interestScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interestscreen);
         ImageButton imageButton = (ImageButton) findViewById(R.id.btnProfile);
-        ImageButton addButton = (ImageButton)findViewById(R.id.imageButton2);
+        ImageButton toListing = (ImageButton)findViewById(R.id.imageButton2);
         mPopupMenu = new PopupMenu(this, imageButton);
         MenuInflater menuInflater = mPopupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.settings_menu, mPopupMenu.getMenu());
@@ -27,11 +27,12 @@ public class interestScreen extends AppCompatActivity {
                 mPopupMenu.show();
             }
         });
-    }
-
-    public void addItemPage(View view){
-        Intent intent = new Intent(interestScreen.this,addListing.class);
-        startActivity(intent);
+        toListing.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(interestScreen.this,addListing.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
