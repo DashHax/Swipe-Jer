@@ -22,12 +22,12 @@ import java.io.ByteArrayOutputStream;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class interestScreen extends AppCompatActivity {
-    public static SQLiteHelper sqLiteHelper;
+    private static SQLiteHelper sqLiteHelper;
 
     SharedPreferences shp;
     private PopupMenu mPopupMenu;
     SharedPreferences.Editor shpEditor;
-    Button Btn_Logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,8 +112,8 @@ public class interestScreen extends AppCompatActivity {
         sqLiteHelper.insertData(1, "iPhone 12 Pro", "4999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.test));
         sqLiteHelper.insertData(2, "iPhone 12 Pro Max", "6999.00","test","Gadgets",drawableToByte(R.drawable.ip12));
         sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.iphone));
-        sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Gadgets",drawableToByte(R.drawable.xiaomiredmi30));
-        sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Gadgets",drawableToByte(R.drawable.laptop));
+        sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Women Fashion",drawableToByte(R.drawable.xiaomiredmi30));
+        sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Men Fashion",drawableToByte(R.drawable.laptop));
 
 
 
