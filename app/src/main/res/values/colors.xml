@@ -4,7 +4,12 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorIcon">#4267B2</color>
+    <color name="darkBlue">#1D477A</color>
 
     <color name="greenMain">#9CE2D4</color>
+    <color name="yellowStar">#E9B500</color>
+
+    <color name="duskYellow">#E9B500</color>
+    <color name="lightGrey">#808080</color>
 
 </resources>
