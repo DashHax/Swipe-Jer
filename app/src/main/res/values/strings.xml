@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Swipe-Jer</string>
     <string name="sign_in">Sign In</string>
+
+    <string-array name="category">
+        <item>Men Fashion</item>
+        <item>Women Fashion</item>
+        <item>Electronics</item>
+        <item>Mobile Gadgets</item>
+    </string-array>
 </resources>
