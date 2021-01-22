@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button buttonRegister;
 
     //Declaration SqliteHelper
-    SqliteHelper sqliteHelper;
+    SQLiteHelper sqLiteHelper;
 
 
     @Override
@@ -41,8 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_layout);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.TB);
         setSupportActionBar(myToolbar);
-        sqliteHelper = new SqliteHelper(this);
+//        sqliteHelper = new SqliteHelper(this);
 
+        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
@@ -63,10 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                     //Check in the database is there any user associated with  this email
-                    if (!sqliteHelper.isEmailExists(Email)) {
+                    if (!sqLiteHelper.isEmailExists(Email)) {
 
                         //Email does not exist now add new user to database
-                        sqliteHelper.addUser(new User(null, UserName, Email, Password,"" , "", Phone_Number ));
+                        sqLiteHelper.addUser(new User(null, UserName, Email, Password,"" , "", Phone_Number ));
 //                        String id, String userName, String email, String password, String gender, String location, String phone_number
                         Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
                         new Handler().postDelayed(new Runnable() {

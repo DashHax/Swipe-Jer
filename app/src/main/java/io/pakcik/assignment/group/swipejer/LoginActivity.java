@@ -34,13 +34,14 @@ public class LoginActivity  extends AppCompatActivity {
     Button buttonLogin;
 
     //Declaration SqliteHelper
-    SqliteHelper sqliteHelper;
+    SQLiteHelper sqLiteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-        sqliteHelper = new SqliteHelper(this);
+//        sqliteHelper = new SQLiteHelper(this, "" , 1 , "");
+        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
         initViews();
 
 
@@ -64,7 +65,7 @@ public class LoginActivity  extends AppCompatActivity {
                     String Password = editTextPassword.getText().toString();
 
                     //Authenticate user
-                    User currentUser = sqliteHelper.Authenticate(new User(null, null, Email, Password, "", "", ""));
+                    User currentUser = sqLiteHelper.Authenticate(new User(null, null, Email, Password, "", "", ""));
 
 
                     //Check Authentication is successful or not
