@@ -55,6 +55,7 @@ public class LoginActivity  extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
 
+
             public void onClick(View view) {
 
                 //Check user input is correct or not
