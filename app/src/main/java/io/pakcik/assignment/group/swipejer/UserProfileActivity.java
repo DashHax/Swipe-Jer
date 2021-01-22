@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class UserProfileActivity extends AppCompatActivity {
     Button Btn_Logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         initViews();
@@ -43,38 +45,22 @@ public class UserProfileActivity extends AppCompatActivity {
         TV_email.setText(email.toString());
         TV_username.setText(userName.toString());
 
+        //To go back to previous activity when profile is clicked
+        ImageView back = (ImageView)findViewById(R.id.imageView4);
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Log.d("myTag - id", user_id);
         Log.d("myTag - email", email);
         Log.d("myTag - username", userName);
         Log.d("myTag - password", pass);
 
-        Btn_Logout.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (shp == null)
-                        shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
-
-                    shpEditor = shp.edit();
-                    shpEditor.putString("name", "");
-                    shpEditor.putString("id", "");
-                    shpEditor.putString("email", "");
-                    shpEditor.putString("username", "");
-                    shpEditor.putString("password", "");
-
-                    shpEditor.commit();
-
-                    Intent i = new Intent(UserProfileActivity.this, LoginActivity.class);
-                    startActivity(i);
-                    finish();
-
-                } catch (Exception ex) {
-                    Toast.makeText(UserProfileActivity.this, ex.getMessage().toString(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
     }
 
@@ -85,10 +71,9 @@ public class UserProfileActivity extends AppCompatActivity {
         TV_location = (TextView) findViewById(R.id.TV_Location2);
         TV_Gender = (TextView) findViewById(R.id.TV_Gender2);
 
-        Btn_Logout = (Button) findViewById(R.id.Btn_Logout);
-
 
     }
+
 
 
 

@@ -51,13 +51,6 @@ public class SwipeActivity extends AppCompatActivity {
 
         sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
 
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS PRODUCT(Id INTEGER PRIMARY KEY AUTOINCREMENT, userID INT, name VARCHAR, price VARCHAR, description TEXT, category VARCHAR, image BLOB)");
-        sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.test));
-        sqLiteHelper.insertData(1, "iPhone 10 Max", "4999.00","test","Gadgets",drawableToByte(R.drawable.test));
-//        sqLiteHelper.insertData(2, "Samsung Uchiha", "500.00","test",drawableToByte(R.drawable.test2));
-//        sqLiteHelper.insertData(3, "Nokia Karasuno", "439.00","test",drawableToByte(R.drawable.test3));
-//        sqLiteHelper.insertData(4, "BlackBebi", "2030.00","test",drawableToByte(R.drawable.test4));
-
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems );
 
         // Select query
@@ -192,24 +185,6 @@ public class SwipeActivity extends AppCompatActivity {
             }
         });
 
-    }
-    public byte[] drawableToByte(int image) {
-        Resources res = getResources();
-        Drawable drawable = res.getDrawable(image);
-        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] bitMapData = stream.toByteArray();
-        return bitMapData;
-    }
-
-    public static byte[] imageViewToByte(ImageView  image) {
-        Drawable myDrawable = image.getDrawable();
-        Bitmap bitmap = ((BitmapDrawable)myDrawable).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
     }
 
     public void show_name() throws Exception {
