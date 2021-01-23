@@ -34,6 +34,9 @@ public class interestScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interestscreen);
+
+        InitDatabase();
+
         ImageButton profileBtn = (ImageButton) findViewById(R.id.btnProfile);
         ImageButton toListing = (ImageButton)findViewById(R.id.imageButton2);
         ImageButton chatboxBtn = (ImageButton) findViewById(R.id.btnChatbox);
@@ -47,7 +50,9 @@ public class interestScreen extends AppCompatActivity {
         chatboxBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(interestScreen.this, Chat.class);
+                intent.putExtra("page", "chatroom");
+                startActivity(intent);
             }
         });
 
@@ -114,25 +119,6 @@ public class interestScreen extends AppCompatActivity {
             }
         });
 
-        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS PRODUCT(Id INTEGER PRIMARY KEY AUTOINCREMENT, userID INT, name VARCHAR, price VARCHAR, description TEXT, category VARCHAR, image BLOB)");
-
-        /*Insert data*/
-        Cursor result = sqLiteHelper.getData("SELECT * FROM product WHERE (name LIKE '%Phone%');");
-        if (!result.moveToNext()) {
-            sqLiteHelper.insertData(1, "iPhone 12 Pro", "4999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.test));
-            sqLiteHelper.insertData(2, "iPhone 12 Pro Max", "6999.00","test","Gadgets",drawableToByte(R.drawable.ip12));
-            sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.iphone));
-            sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Women Fashion",drawableToByte(R.drawable.xiaomiredmi30));
-            sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Men Fashion",drawableToByte(R.drawable.laptop));
-        } else {
-            Log.d("myTag", "Data already exist!");
-        }
-        /**/
-
-
-
-
         final Button menfashionCategory = (Button)findViewById(R.id.menfashion);
         Button womenfashionCategory = (Button)findViewById(R.id.womenfashion);
         Button electronics = (Button)findViewById(R.id.electronics);
@@ -198,6 +184,34 @@ public class interestScreen extends AppCompatActivity {
         });
 
 
+    }
+
+    private void InitDatabase() {
+
+        try {
+            sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
+
+            sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS PRODUCT(Id INTEGER PRIMARY KEY AUTOINCREMENT, userID INT, name VARCHAR, price VARCHAR, description TEXT, category VARCHAR, image BLOB)");
+
+            /*Insert data*/
+            Cursor result = sqLiteHelper.getData("SELECT * FROM product WHERE (name LIKE '%Phone%');");
+            if (!result.moveToNext()) {
+                sqLiteHelper.insertData(1, "iPhone 12 Pro", "4999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.test));
+                sqLiteHelper.insertData(2, "iPhone 12 Pro Max", "6999.00","test","Gadgets",drawableToByte(R.drawable.ip12));
+                sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.iphone));
+                sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Women Fashion",drawableToByte(R.drawable.xiaomiredmi30));
+                sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Men Fashion",drawableToByte(R.drawable.laptop));
+            } else {
+                Log.d("myTag", "Data already exist!");
+            }
+
+            sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS chatroom (id INTEGER PRIMARY KEY AUTOINCREMENT, user_1 INT, user_2 INT, product_id INT);");
+            sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS attachments (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, att_type TEXT, content BLOB);");
+            sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS meetings (id INTEGER PRIMARY KEY AUTOINCREMENT, place_name TEXT, place_desc TEXT, datetime TEXT, finished INTEGER);");
+            sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS chat_entry (chatroom_id INTEGER, from_id INTEGER, to_id INTEGER, message TEXT, time TEXT, attachment_id INTEGER, meeting_id INTEGER);");
+        } catch (Exception ex) {
+            Log.d("DB", "Error while init db: " + ex.getMessage());
+        }
     }
 
     public byte[] drawableToByte(int image) {
