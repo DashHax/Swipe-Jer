@@ -4,15 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -153,7 +150,7 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
     private void init(){
         itemName = (EditText)findViewById(R.id.item);
         itemPrice = (EditText)findViewById(R.id.price);
-        submitBtn = (Button)findViewById(R.id.submit);
+        submitBtn = (Button)findViewById(R.id.updateBtn);
         itemDesc = (EditText)findViewById(R.id.itemDescrip);
         itemView1 = (ImageView)findViewById(R.id.imageView1);
     }
