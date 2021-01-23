@@ -153,6 +153,15 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onRightCardExit(Object dataObject) {
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
+                String p_name = rowItems.get(0).getName();
+                int p_id = rowItems.get(0).getItemId();
+                String p_price = rowItems.get(0).getPrice();
+                int p_userid = rowItems.get(0).getUserId();
+                intent.putExtra("page", "chatbox");
+                intent.putExtra("product_id", p_id);
+                intent.putExtra("product_name", p_name);
+                intent.putExtra("product_price", p_price);
+                intent.putExtra("seller_id", p_userid);
                 startActivity(intent);
 //                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
             }
