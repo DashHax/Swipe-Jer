@@ -88,6 +88,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         statement.bindString(4, description);
         statement.bindString(5, category);
         statement.bindBlob(6, image);
+        statement.bindDouble(7,id);
 
         statement.execute();
         database.close();
