@@ -1,26 +1,25 @@
 package io.pakcik.assignment.group.swipejer;
 
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,9 +35,13 @@ public class SwipeActivity extends AppCompatActivity {
     List<cards> rowItems;
     Button reverse;
 
-
+    private String query;
     private String currentUId;
-    public static SQLiteHelper sqLiteHelper;
+    private static SQLiteHelper sqLiteHelper;
+
+    SharedPreferences shp;
+    private PopupMenu mPopupMenu;
+    SharedPreferences.Editor shpEditor;
 
 
 
@@ -47,16 +50,55 @@ public class SwipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.swipescreen_layout);
 
+        ImageButton btnChat = (ImageButton)findViewById(R.id.btnGoToChatbox);
+
         rowItems = new ArrayList<cards>();
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems );
+        if (shp == null)
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        String current_user = shp.getString("id", "");
+
+        Intent _int = getIntent();
+        if (_int.hasExtra("category")) {
+            query = "SELECT * FROM product WHERE category = '" + _int.getStringExtra("category") + "' AND userID != "+current_user +";";
+        } else if (_int.hasExtra("name")) {
+            query = "SELECT * FROM product WHERE (name LIKE '%" + _int.getStringExtra("name") + "%') AND userID != "+current_user +";";
+        } else {
+            query = "SELECT * FROM product WHERE userID != "+current_user+";";
+        }
 
         // Select query
-        // Need to add logic for where clause
-        String query = "SELECT * FROM product";
+        /*try {
+            String category = getIntent().getStringExtra("category");
+            Log.d("test",category);
 
+            query = "SELECT * FROM product WHERE category = '" + category+"'";
+            Log.d("test",query);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("test","No category");
+            query = "SELECT * FROM product";
+        }
+
+        try {
+            String name = getIntent().getStringExtra("name");
+            Log.d("test",name);
+
+            query = "SELECT * FROM PRODUCT WHERE (name LIKE '%"+ name+ "%')";
+            Log.d("test",query);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("test","No category");
+            query = "SELECT * FROM product";
+        }*/
+
+        // Need to add logic for where clause
+
+        Log.d("items", "query = " + query);
         // get all data from sqlite
         Cursor cursor = SwipeActivity.sqLiteHelper.getData(query);
         rowItems.clear();
@@ -65,10 +107,10 @@ public class SwipeActivity extends AppCompatActivity {
             int user_id = cursor.getInt(1);
             String name = cursor.getString(2);
             String price = cursor.getString(3);
-            String description = cursor.getString(5);
+            String description = cursor.getString(4);
             byte[] image = cursor.getBlob(6);
 
-            rowItems.add(new cards(user_id, name, price,description,image));
+            rowItems.add(new cards(id, user_id, name, price,description,image));
         }
         arrayAdapter.notifyDataSetChanged();
 
@@ -111,6 +153,15 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onRightCardExit(Object dataObject) {
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
+                String p_name = rowItems.get(0).getName();
+                int p_id = rowItems.get(0).getItemId();
+                String p_price = rowItems.get(0).getPrice();
+                int p_userid = rowItems.get(0).getUserId();
+                intent.putExtra("page", "chatbox");
+                intent.putExtra("product_id", p_id);
+                intent.putExtra("product_name", p_name);
+                intent.putExtra("product_price", p_price);
+                intent.putExtra("seller_id", p_userid);
                 startActivity(intent);
 //                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
             }
@@ -180,12 +231,96 @@ public class SwipeActivity extends AppCompatActivity {
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String p_name = rowItems.get(0).getName();
+                int p_id = rowItems.get(0).getItemId();
+                String p_price = rowItems.get(0).getPrice();
+                int p_userid = rowItems.get(0).getUserId();
+
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
+                intent.putExtra("page", "chatbox");
+                intent.putExtra("product_id", p_id);
+                intent.putExtra("product_name", p_name);
+                intent.putExtra("product_price", p_price);
+                intent.putExtra("seller_id", p_userid);
                 startActivity(intent);
             }
         });
 
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SwipeActivity.this, Chat.class);
+                intent.putExtra("page", "chatroom");
+                startActivity(intent);
+            }
+        });
+
+        // Click Swipejer button
+        Button swipejerbtn = (Button) findViewById(R.id.btnSwipeJer);
+        swipejerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), interestScreen.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton profileBtn = (ImageButton) findViewById(R.id.btnProfile);
+        // Popup menu
+        mPopupMenu = new PopupMenu(this, profileBtn);
+        MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.settings_menu, mPopupMenu.getMenu());
+        if (shp == null)
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupMenu.show();
+                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getTitle().equals("Profile")) {
+                            Intent profile = new Intent(SwipeActivity.this, UserProfileActivity.class);
+                            startActivity(profile);
+                        }
+
+
+                        else if (item.getTitle().equals("Logout")){
+                            try {
+                                if (shp == null)
+                                    shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                                shpEditor = shp.edit();
+                                shpEditor.putString("name", "");
+                                shpEditor.putString("id", "");
+                                shpEditor.putString("email", "");
+                                shpEditor.putString("username", "");
+                                shpEditor.putString("password", "");
+
+                                shpEditor.commit();
+
+                                Intent i = new Intent(SwipeActivity.this, LoginActivity.class);
+                                startActivity(i);
+                                finish();
+
+                            } catch (Exception ex) {
+                                Toast.makeText(SwipeActivity.this, ex.getMessage().toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+
+
+
+
+                        return true;
+                    }
+                });
+            }
+        });
+
     }
+
 
     public void show_name() throws Exception {
         try {

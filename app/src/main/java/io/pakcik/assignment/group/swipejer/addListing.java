@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,7 +52,7 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
         spinner.setOnItemSelectedListener(this);
         init();
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 //        sqLiteHelper.queryData("DROP TABLE IF EXISTS PRODUCT");
 
         itemView1.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
         });
 
         if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String user_id = shp.getString("id", "");
         final int userid = Integer.parseInt(user_id);

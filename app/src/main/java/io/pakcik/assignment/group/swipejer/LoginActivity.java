@@ -1,7 +1,10 @@
 package io.pakcik.assignment.group.swipejer;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,21 +37,23 @@ public class LoginActivity  extends AppCompatActivity {
     Button buttonLogin;
 
     //Declaration SqliteHelper
-    SQLiteHelper sqLiteHelper;
+    private static SQLiteHelper sqLiteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 //        sqliteHelper = new SQLiteHelper(this, "" , 1 , "");
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
         initViews();
 
+        shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        shpEditor = shp.edit();
 
         email = findViewById(R.id.TV_Email);
         pass = findViewById(R.id.TV_Password);
         signInButton = findViewById(R.id.Btn_SignIn);
-//        fAuth = FirebaseAuth.getInstance();
+
         CheckLogin();
 
         //set click event of login button
@@ -79,20 +84,19 @@ public class LoginActivity  extends AppCompatActivity {
 
                         Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
                         if (shp == null)
-                            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+                            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                            shpEditor = shp.edit();
-                            shpEditor.putString("id", currentUser.id);
-                            shpEditor.putString("email", currentUser.email);
-                            shpEditor.putString("username", currentUser.userName);
-                            shpEditor.putString("password", currentUser.password);
+                        shpEditor.putString("id", currentUser.id);
+                        shpEditor.putString("email", currentUser.email);
+                        shpEditor.putString("username", currentUser.userName);
+                        shpEditor.putString("password", currentUser.password);
 
-                            shpEditor.commit();
+                        shpEditor.commit();
 
 
-                            Intent i = new Intent(LoginActivity.this, interestScreen.class);
-                            startActivity(i);
-                            finish();
+                        Intent i = new Intent(LoginActivity.this, interestScreen.class);
+                        startActivity(i);
+                        finish();
 
                     } else {
 
@@ -150,12 +154,13 @@ public class LoginActivity  extends AppCompatActivity {
 
     public void CheckLogin() {
         if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        String userName = shp.getString("name", "");
+        String userName = shp.getString("username", "");
+        Log.d("myTag", "username = " + userName);
 
         if (userName != null && !userName.equals("")) {
-            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent i = new Intent(LoginActivity.this, interestScreen.class);
             startActivity(i);
             finish();
         }
