@@ -196,7 +196,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //Create Table when oncreate gets called
         sqLiteDatabase.execSQL(SQL_TABLE_USERS);
 
-        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'aminhakim' , 'a@a.com' ,  '1234qwer' , '' , '' , '' );");
+        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'aminhakim' , 'a@a.com' ,  '1234qwer' , 'Male' , '0122031134' , 'Shah Alam' );");
         sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'senoi' , 'senoi@topglove.com' ,  '1234qwer' , '' , '' , '' );");
         sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'odell' , 'odell@ivis.com' ,  '1234qwer' , '' , '' , '' );");
         sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'aqiff' , 'aqiff@tnb.com' ,  '1234qwer' , '' , '' , '' );");
