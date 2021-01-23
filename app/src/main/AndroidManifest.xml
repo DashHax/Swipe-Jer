@@ -63,13 +63,25 @@
         <activity
             android:name=".RegisterActivity"
             android:label="childPage"
-            android:parentActivityName=".LoginActivity" /> <!-- Pop up window -->
-        <activity
-            android:name=".PopUpWindow"
-            android:theme="@style/AppTheme.PopMe" /> <!-- Chat Page -->
-        <activity android:name=".Chat" /> <!-- Interest screen -->
-        <activity android:name=".interestScreen" /> <!-- Add listing -->
-        <activity android:name=".addListing" /> <!-- Swipescreen Page -->
+            android:parentActivityName=".LoginActivity"></activity>
+
+        <!--Pop up window-->
+        <activity android:name=".PopUpWindow" android:theme="@style/AppTheme.PopMe" />
+
+        <!-- Chat Page -->
+        <activity android:name=".Chat" />
+
+        <!--Interest screen-->
+        <activity android:name=".interestScreen"></activity>
+
+        <!--Add listing-->
+        <activity android:name=".addListing"></activity>
+
+<!--        Edit Listing-->
+        <activity android:name=".editListing"></activity>
+
+        <!-- Swipescreen Page -->
+
         <activity android:name=".SwipeActivity" />
         <activity android:name=".PopLocation"
             android:theme="@style/AppTheme.PopTheme"></activity>
