@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +40,7 @@ public class interestScreen extends AppCompatActivity {
         MenuInflater menuInflater = mPopupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.settings_menu, mPopupMenu.getMenu());
         if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,7 @@ public class interestScreen extends AppCompatActivity {
                         else if (item.getTitle().equals("Logout")){
                             try {
                                 if (shp == null)
-                                    shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+                                    shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                                 shpEditor = shp.edit();
                                 shpEditor.putString("name", "");

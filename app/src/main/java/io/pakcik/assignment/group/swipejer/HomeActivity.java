@@ -7,10 +7,14 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.prefs.PreferenceChangeEvent;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         mTextView = (TextView) findViewById(R.id.textView5);
         LogoutButton = (Button) findViewById(R.id.buttonLogout);
 
-        shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+        shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         CheckLogin();
 
         LogoutButton.setOnClickListener(new View.OnClickListener(){
@@ -38,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if (shp == null)
-                        shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+                        shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                     shpEditor = shp.edit();
                     shpEditor.putString("name", "");
@@ -63,9 +67,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public void CheckLogin() {
         if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
-
-        String userName = shp.getString("name", "");
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Log.d("myTag", "in home");
+        String userName = shp.getString("username", "");
 
         if (userName != null && !userName.equals("")) {
             mTextView.setText("Welcome " + userName);

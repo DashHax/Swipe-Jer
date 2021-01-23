@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class UserProfileActivity extends AppCompatActivity {
         initViews();
 
         if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String user_id = shp.getString("id", "");
         String userName = shp.getString("username", "");
