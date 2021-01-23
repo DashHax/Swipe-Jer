@@ -1,6 +1,7 @@
 package io.pakcik.assignment.group.swipejer;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -36,7 +37,7 @@ public class LoginActivity  extends AppCompatActivity {
     Button buttonLogin;
 
     //Declaration SqliteHelper
-    SQLiteHelper sqLiteHelper;
+    private static SQLiteHelper sqLiteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class LoginActivity  extends AppCompatActivity {
         email = findViewById(R.id.TV_Email);
         pass = findViewById(R.id.TV_Password);
         signInButton = findViewById(R.id.Btn_SignIn);
-//        fAuth = FirebaseAuth.getInstance();
+
         CheckLogin();
 
         //set click event of login button

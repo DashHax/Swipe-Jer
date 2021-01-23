@@ -68,7 +68,6 @@ public class interestScreen extends AppCompatActivity {
                             startActivity(profile);
                         }
 
-
                         else if (item.getTitle().equals("Logout")){
                             try {
                                 if (shp == null)
@@ -91,11 +90,6 @@ public class interestScreen extends AppCompatActivity {
                                 Toast.makeText(interestScreen.this, ex.getMessage().toString(), Toast.LENGTH_LONG).show();
                             }
                         }
-
-
-
-
-
                         return true;
                     }
                 });
@@ -251,10 +245,6 @@ public class interestScreen extends AppCompatActivity {
                 sqLiteHelper.insertData(3, "Denim Shirt for Women", "71.00","Denim Shirt for women, size M, did not really like the fabric","Women Fashion",drawableToByte(R.drawable.denimwomen));
                 sqLiteHelper.insertData(4, "High heels Gucci", "3099.00","used heels, receipt from London as proof. Feet is UK 6","Women Fashion",drawableToByte(R.drawable.highheels));
                 sqLiteHelper.insertData(1, "Palazzo Dark Green", "92.00","New stock dark green palazzo","Women Fashion",drawableToByte(R.drawable.palazoo));
-
-
-
-
 
             } else {
                 Log.d("myTag", "Data already exist!");
