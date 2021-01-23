@@ -57,14 +57,18 @@ public class SwipeActivity extends AppCompatActivity {
         sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems );
+        if (shp == null)
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        String current_user = shp.getString("id", "");
 
         Intent _int = getIntent();
         if (_int.hasExtra("category")) {
-            query = "SELECT * FROM product WHERE category = '" + _int.getStringExtra("category") + "';";
+            query = "SELECT * FROM product WHERE category = '" + _int.getStringExtra("category") + "' AND userID != "+current_user +";";
         } else if (_int.hasExtra("name")) {
-            query = "SELECT * FROM product WHERE (name LIKE '%" + _int.getStringExtra("name") + "%');";
+            query = "SELECT * FROM product WHERE (name LIKE '%" + _int.getStringExtra("name") + "%') AND userID != "+current_user +";";
         } else {
-            query = "SELECT * FROM product";
+            query = "SELECT * FROM product WHERE userID != "+current_user+";";
         }
 
         // Select query
