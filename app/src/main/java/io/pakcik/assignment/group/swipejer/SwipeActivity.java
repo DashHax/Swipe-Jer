@@ -2,11 +2,7 @@ package io.pakcik.assignment.group.swipejer;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -16,7 +12,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -25,7 +20,6 @@ import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,6 +49,8 @@ public class SwipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.swipescreen_layout);
+
+        ImageButton btnChat = (ImageButton)findViewById(R.id.btnGoToChatbox);
 
         rowItems = new ArrayList<cards>();
 
@@ -242,6 +238,15 @@ public class SwipeActivity extends AppCompatActivity {
                 intent.putExtra("product_name", p_name);
                 intent.putExtra("product_price", p_price);
                 intent.putExtra("seller_id", p_userid);
+                startActivity(intent);
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SwipeActivity.this, Chat.class);
+                intent.putExtra("page", "chatroom");
                 startActivity(intent);
             }
         });

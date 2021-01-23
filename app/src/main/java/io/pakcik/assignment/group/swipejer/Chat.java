@@ -25,9 +25,9 @@ public class Chat extends AppCompatActivity {
 
         webView.addJavascriptInterface(new ChatJsBinding(this, webView, this, PreferenceManager.getDefaultSharedPreferences(getApplicationContext())), "Chat");
 
-        webView.clearCache(true);
+        //webView.clearCache(true);
         webView.loadUrl("https://swipejerchat.web.app");
-        //webView.loadUrl("https://chat-swipejer.dexe.dev");
+        //webView.loadUrl("https://attemptclear.lynk.sh");
     }
 
     @Override
