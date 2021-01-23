@@ -190,8 +190,9 @@ public class interestScreen extends AppCompatActivity {
 
         try {
             sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
+            sqLiteHelper.queryData("DROP TABLE IF EXISTS PRODUCT");
             sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS PRODUCT(Id INTEGER PRIMARY KEY AUTOINCREMENT, userID INT, name VARCHAR, price VARCHAR, description TEXT, category VARCHAR, image BLOB)");
-            //sqLiteHelper.queryData("DROP TABLE IF EXISTS PRODUCT");
+
 
             /*Insert data*/
             Cursor result = sqLiteHelper.getData("SELECT * FROM product WHERE (name LIKE '%Phone%');");
