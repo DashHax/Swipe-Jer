@@ -223,9 +223,16 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String p_name = rowItems.get(0).getName();
-                Cursor productSearch = sqLiteHelper.getData("SELECT id FROM product WHERE name = '" + p_name + "' LIMIT 1");
+                int p_id = rowItems.get(0).getItemId();
+                String p_price = rowItems.get(0).getPrice();
+                int p_userid = rowItems.get(0).getUserId();
 
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
+                intent.putExtra("page", "chatbox");
+                intent.putExtra("product_id", p_id);
+                intent.putExtra("product_name", p_name);
+                intent.putExtra("product_price", p_price);
+                intent.putExtra("seller_id", p_userid);
                 startActivity(intent);
             }
         });
