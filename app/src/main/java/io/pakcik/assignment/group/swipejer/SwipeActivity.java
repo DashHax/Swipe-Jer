@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,12 +58,21 @@ public class SwipeActivity extends AppCompatActivity {
 
         rowItems = new ArrayList<cards>();
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems );
 
+        Intent _int = getIntent();
+        if (_int.hasExtra("category")) {
+            query = "SELECT * FROM product WHERE category = '" + _int.getStringExtra("category") + "';";
+        } else if (_int.hasExtra("name")) {
+            query = "SELECT * FROM product WHERE (name LIKE '%" + _int.getStringExtra("name") + "%');";
+        } else {
+            query = "SELECT * FROM product";
+        }
+
         // Select query
-        try {
+        /*try {
             String category = getIntent().getStringExtra("category");
             Log.d("test",category);
 
@@ -84,11 +94,11 @@ public class SwipeActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.d("test","No category");
             query = "SELECT * FROM product";
-        }
+        }*/
 
         // Need to add logic for where clause
 
-
+        Log.d("items", "query = " + query);
         // get all data from sqlite
         Cursor cursor = SwipeActivity.sqLiteHelper.getData(query);
         rowItems.clear();
@@ -100,7 +110,7 @@ public class SwipeActivity extends AppCompatActivity {
             String description = cursor.getString(4);
             byte[] image = cursor.getBlob(6);
 
-            rowItems.add(new cards(user_id, name, price,description,image));
+            rowItems.add(new cards(id, user_id, name, price,description,image));
         }
         arrayAdapter.notifyDataSetChanged();
 
@@ -212,7 +222,17 @@ public class SwipeActivity extends AppCompatActivity {
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String p_name = rowItems.get(0).getName();
+                int p_id = rowItems.get(0).getItemId();
+                String p_price = rowItems.get(0).getPrice();
+                int p_userid = rowItems.get(0).getUserId();
+
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
+                intent.putExtra("page", "chatbox");
+                intent.putExtra("product_id", p_id);
+                intent.putExtra("product_name", p_name);
+                intent.putExtra("product_price", p_price);
+                intent.putExtra("seller_id", p_userid);
                 startActivity(intent);
             }
         });
@@ -232,7 +252,7 @@ public class SwipeActivity extends AppCompatActivity {
         MenuInflater menuInflater = mPopupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.settings_menu, mPopupMenu.getMenu());
         if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
@@ -251,7 +271,7 @@ public class SwipeActivity extends AppCompatActivity {
                         else if (item.getTitle().equals("Logout")){
                             try {
                                 if (shp == null)
-                                    shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+                                    shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                                 shpEditor = shp.edit();
                                 shpEditor.putString("name", "");

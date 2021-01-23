@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 //        sqliteHelper = new SqliteHelper(this);
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);

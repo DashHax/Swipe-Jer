@@ -128,13 +128,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_PASSWORD, user.password);
 
         //Put gender in  @values
-        values.put(KEY_PASSWORD, user.gender);
+        values.put(KEY_GENDER, user.gender);
 
         //Put location in  @values
-        values.put(KEY_PASSWORD, user.location);
+        values.put(KEY_LOCATION, user.location);
 
         //Put phone number in  @values
-        values.put(KEY_PASSWORD, user.phone_number);
+        values.put(KEY_PHONE_NUMBER, user.phone_number);
 
         // insert row
         long todo_id = db.insert(TABLE_USERS, null, values);
@@ -184,6 +184,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         //if email does not exist return false
         return false;
+    }
+
+    private void InitializeChatTables() {
+        String schemaChatroom = "CREATE TABLE chatroom (id INTEGER PRIMARY KEY, user_1 INTEGER, user_2 INTEGER, ";
     }
 
     @Override
