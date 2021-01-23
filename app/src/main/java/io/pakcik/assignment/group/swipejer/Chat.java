@@ -17,8 +17,9 @@ public class Chat extends AppCompatActivity {
         WebView webView = (WebView)findViewById(R.id.wvChat);
         WebSettings sett = webView.getSettings();
         sett.setJavaScriptEnabled(true);
-        webView.loadUrl("https://swipejerchat.web.app");
         sett.setJavaScriptCanOpenWindowsAutomatically(false);
+        webView.clearCache(true);
+        webView.loadUrl("https://swipejerchat.web.app");
         //webView.loadUrl("https://chat-swipejer.dexe.dev");
     }
 }
