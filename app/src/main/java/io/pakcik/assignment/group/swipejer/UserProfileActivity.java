@@ -34,6 +34,11 @@ public class UserProfileActivity extends AppCompatActivity {
     ImageView item3;
     ImageView item4;
 
+    int item1_ID ;
+    int item2_ID ;
+    int item3_ID ;
+    int item4_ID ;
+
     private static SQLiteHelper sqLiteHelper;
 
 
@@ -52,6 +57,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String userName = shp.getString("username", "");
         String email = shp.getString("email", "");
         String pass = shp.getString("password", "");
+
 
         TV_email.setText(email.toString());
         TV_username.setText(userName.toString());
@@ -99,9 +105,12 @@ public class UserProfileActivity extends AppCompatActivity {
         Log.d("User ID: " ,  cursor.toString());
         Integer count = 1;
 
+
+
         while (cursorImage.moveToNext()) {
             if (count == 1){
                 byte[] image = cursorImage.getBlob(6);
+                item1_ID = cursorImage.getInt(0);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 item1.setVisibility(View.VISIBLE);
                 item1.setImageBitmap(bitmap);
@@ -110,6 +119,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
             if (count == 2){
                 byte[] image = cursorImage.getBlob(6);
+                item2_ID = cursorImage.getInt(0);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 item2.setVisibility(View.VISIBLE);
                 item2.setImageBitmap(bitmap);
@@ -118,6 +128,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
             if (count == 3){
                 byte[] image = cursorImage.getBlob(6);
+                item3_ID = cursorImage.getInt(0);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 item3.setVisibility(View.VISIBLE);
                 item3.setImageBitmap(bitmap);
@@ -125,6 +136,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
             if (count == 4){
                 byte[] image = cursorImage.getBlob(6);
+                item4_ID = cursorImage.getInt(0);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 item4.setVisibility(View.VISIBLE);
                 item4.setImageBitmap(bitmap);
@@ -133,6 +145,52 @@ public class UserProfileActivity extends AppCompatActivity {
 
             count++;
         }
+
+
+        item1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Image 1 ID", String.valueOf(item1_ID));
+                Intent i = new Intent(UserProfileActivity.this, editListing.class);
+                i.putExtra("id", String.valueOf(item1_ID));
+                startActivity(i);
+                finish();
+            }
+        });
+
+
+        item2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(UserProfileActivity.this, editListing.class);
+                i.putExtra("id", String.valueOf(item2_ID));
+                startActivity(i);
+                finish();
+            }
+        });
+
+        item3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(UserProfileActivity.this, editListing.class);
+                i.putExtra("id", String.valueOf(item3_ID));
+                startActivity(i);
+                finish();
+            }
+        });
+
+        item4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(UserProfileActivity.this, editListing.class);
+                i.putExtra("id", String.valueOf(item4_ID));
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 

@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,9 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editlisting);
+        Intent _int = getIntent();
+        String item_ID  = _int.getStringExtra("id");
+        Log.d("CURRENT ID", item_ID);
 
 
         final Spinner spinner = findViewById(R.id.spinner1);
@@ -48,6 +52,9 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         init();
+
+
+
 
         sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 //        sqLiteHelper.queryData("DROP TABLE IF EXISTS PRODUCT");

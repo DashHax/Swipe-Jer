@@ -66,6 +66,9 @@
         <!--Add listing-->
         <activity android:name=".addListing"></activity>
 
+<!--        Edit Listing-->
+        <activity android:name=".editListing"></activity>
+
         <!-- Swipescreen Page -->
         <activity android:name=".SwipeActivity" />
 
