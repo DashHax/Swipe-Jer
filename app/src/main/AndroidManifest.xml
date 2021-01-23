@@ -7,8 +7,8 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserProfileActivity">
 
-        </activity>
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -29,13 +27,27 @@
             android:value="true" />
 
         <activity
+            android:name=".ChangePassword"
+            android:label="@string/title_activity_change_password"
+            android:parentActivityName=".SettingScreen"></activity>
+        <activity
+            android:name=".ChangeUsername"
+            android:label="@string/title_activity_change_username"
+            android:parentActivityName=".SettingScreen"/>
+        <activity
+            android:name=".SettingScreen"
+            android:label="@string/title_activity_setting_screen" />
+        <activity android:name=".UserProfileActivity" />
+        <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".MainActivity" />
         <activity
@@ -51,7 +63,6 @@
         <activity
             android:name=".RegisterActivity"
             android:label="childPage"
-
             android:parentActivityName=".LoginActivity"></activity>
 
         <!--Pop up window-->
@@ -70,9 +81,16 @@
         <activity android:name=".editListing"></activity>
 
         <!-- Swipescreen Page -->
+
         <activity android:name=".SwipeActivity" />
-
-
+        <activity android:name=".PopLocation"
+            android:theme="@style/AppTheme.PopTheme"></activity>
+        <activity android:name=".PopRateUs"
+            android:theme="@style/AppTheme.PopTheme"></activity>
+        <activity android:name=".PopContactUs"
+            android:theme="@style/AppTheme.PopTheme"></activity>
+        <activity android:name=".PopAbout"
+            android:theme="@style/AppTheme.PopTheme"></activity>
     </application>
 
 </manifest>

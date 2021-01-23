@@ -284,7 +284,10 @@ public class SwipeActivity extends AppCompatActivity {
                             Intent profile = new Intent(SwipeActivity.this, UserProfileActivity.class);
                             startActivity(profile);
                         }
-
+                        else if (item.getTitle().equals("Settings")) {
+                            Intent settings = new Intent(SwipeActivity.this, SettingScreen.class);
+                            startActivity(settings);
+                        }
 
                         else if (item.getTitle().equals("Logout")){
                             try {

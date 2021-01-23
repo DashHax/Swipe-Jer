@@ -16,5 +16,8 @@
         <item>Electronics</item>
         <item>Gadgets</item>
     </string-array>
+    <string name="title_activity_setting_screen">SettingScreen</string>
+    <string name="title_activity_change_username">ChangeUsername</string>
+    <string name="title_activity_change_password">ChangePassword</string>
 
 </resources>
