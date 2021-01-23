@@ -52,7 +52,7 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
         spinner.setOnItemSelectedListener(this);
         init();
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 //        sqLiteHelper.queryData("DROP TABLE IF EXISTS PRODUCT");
 
         itemView1.setOnClickListener(new View.OnClickListener() {

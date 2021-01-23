@@ -43,7 +43,7 @@ public class LoginActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 //        sqliteHelper = new SQLiteHelper(this, "" , 1 , "");
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
         initViews();
 
         shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

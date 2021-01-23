@@ -3,6 +3,7 @@ package io.pakcik.assignment.group.swipejer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -35,6 +36,7 @@ public class interestScreen extends AppCompatActivity {
         setContentView(R.layout.interestscreen);
         ImageButton profileBtn = (ImageButton) findViewById(R.id.btnProfile);
         ImageButton toListing = (ImageButton)findViewById(R.id.imageButton2);
+        ImageButton chatboxBtn = (ImageButton) findViewById(R.id.btnChatbox);
 
         mPopupMenu = new PopupMenu(this, profileBtn);
         MenuInflater menuInflater = mPopupMenu.getMenuInflater();
@@ -42,6 +44,12 @@ public class interestScreen extends AppCompatActivity {
         if (shp == null)
             shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        chatboxBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,15 +114,21 @@ public class interestScreen extends AppCompatActivity {
             }
         });
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
         sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS PRODUCT(Id INTEGER PRIMARY KEY AUTOINCREMENT, userID INT, name VARCHAR, price VARCHAR, description TEXT, category VARCHAR, image BLOB)");
 
         /*Insert data*/
-        sqLiteHelper.insertData(1, "iPhone 12 Pro", "4999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.test));
-        sqLiteHelper.insertData(2, "iPhone 12 Pro Max", "6999.00","test","Gadgets",drawableToByte(R.drawable.ip12));
-        sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.iphone));
-        sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Women Fashion",drawableToByte(R.drawable.xiaomiredmi30));
-        sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Men Fashion",drawableToByte(R.drawable.laptop));
+        Cursor result = sqLiteHelper.getData("SELECT * FROM product WHERE (name LIKE '%Phone%');");
+        if (!result.moveToNext()) {
+            sqLiteHelper.insertData(1, "iPhone 12 Pro", "4999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.test));
+            sqLiteHelper.insertData(2, "iPhone 12 Pro Max", "6999.00","test","Gadgets",drawableToByte(R.drawable.ip12));
+            sqLiteHelper.insertData(1, "iPhone 11", "3999.00","used iPhone, want to buy new","Gadgets",drawableToByte(R.drawable.iphone));
+            sqLiteHelper.insertData(2, "Xiaomi Redmi K30", "1599.00","used for 1 year, condition like neelofa","Women Fashion",drawableToByte(R.drawable.xiaomiredmi30));
+            sqLiteHelper.insertData(3, "Lenovo Laptop", "6599.00","used for 1 year, condition like neelofa","Men Fashion",drawableToByte(R.drawable.laptop));
+        } else {
+            Log.d("myTag", "Data already exist!");
+        }
+        /**/
 
 
 

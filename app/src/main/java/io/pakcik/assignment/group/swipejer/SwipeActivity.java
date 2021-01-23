@@ -58,12 +58,21 @@ public class SwipeActivity extends AppCompatActivity {
 
         rowItems = new ArrayList<cards>();
 
-        sqLiteHelper = new SQLiteHelper(this, "SwipeJerDB.sqlite", null, 1);
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
 
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems );
 
+        Intent _int = getIntent();
+        if (_int.hasExtra("category")) {
+            query = "SELECT * FROM product WHERE category = '" + _int.getStringExtra("category") + "';";
+        } else if (_int.hasExtra("name")) {
+            query = "SELECT * FROM product WHERE (name LIKE '%" + _int.getStringExtra("name") + "%');";
+        } else {
+            query = "SELECT * FROM product";
+        }
+
         // Select query
-        try {
+        /*try {
             String category = getIntent().getStringExtra("category");
             Log.d("test",category);
 
@@ -85,11 +94,11 @@ public class SwipeActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.d("test","No category");
             query = "SELECT * FROM product";
-        }
+        }*/
 
         // Need to add logic for where clause
 
-
+        Log.d("items", "query = " + query);
         // get all data from sqlite
         Cursor cursor = SwipeActivity.sqLiteHelper.getData(query);
         rowItems.clear();
@@ -101,7 +110,7 @@ public class SwipeActivity extends AppCompatActivity {
             String description = cursor.getString(4);
             byte[] image = cursor.getBlob(6);
 
-            rowItems.add(new cards(user_id, name, price,description,image));
+            rowItems.add(new cards(id, user_id, name, price,description,image));
         }
         arrayAdapter.notifyDataSetChanged();
 
@@ -213,6 +222,9 @@ public class SwipeActivity extends AppCompatActivity {
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String p_name = rowItems.get(0).getName();
+                Cursor productSearch = sqLiteHelper.getData("SELECT id FROM product WHERE name = '" + p_name + "' LIMIT 1");
+
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
                 startActivity(intent);
             }
