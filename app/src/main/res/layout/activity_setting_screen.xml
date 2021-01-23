@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".SettingScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+        <Button
+            android:id="@+id/btnSwipeJer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="12"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/pacifico"
+            android:text="Swipe-Jer"
+            android:textAllCaps="false"
+            android:textColor="@color/colorFont"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/btnChatBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_chat" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listSetting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_rectangle"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:fadeScrollbars="true"
+        android:padding="5dp" />
+
+</LinearLayout>

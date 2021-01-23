@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_rectangle"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvLocationChange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHANGE LOCATION"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvNewLocation"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter new location" />
+
+    <EditText
+        android:id="@+id/etNewLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnNewLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm" />
+
+</LinearLayout>

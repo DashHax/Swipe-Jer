@@ -67,7 +67,10 @@ public class interestScreen extends AppCompatActivity {
                             Intent profile = new Intent(interestScreen.this, UserProfileActivity.class);
                             startActivity(profile);
                         }
-
+                        else if (item.getTitle().equals("Settings")) {
+                            Intent settings = new Intent(interestScreen.this, SettingScreen.class);
+                            startActivity(settings);
+                        }
                         else if (item.getTitle().equals("Logout")){
                             try {
                                 if (shp == null)
