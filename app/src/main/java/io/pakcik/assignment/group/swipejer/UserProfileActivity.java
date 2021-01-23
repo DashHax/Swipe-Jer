@@ -42,6 +42,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String email = shp.getString("email", "");
         String pass = shp.getString("password", "");
 
+
         TV_email.setText(email.toString());
         TV_username.setText(userName.toString());
 
