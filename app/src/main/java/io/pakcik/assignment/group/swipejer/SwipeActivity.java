@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +28,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SwipeActivity extends AppCompatActivity {
+public class SwipeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private cards cards_date[];
     private ArrayAdapter arrayAdapter;
@@ -42,6 +44,15 @@ public class SwipeActivity extends AppCompatActivity {
     SharedPreferences shp;
     private PopupMenu mPopupMenu;
     SharedPreferences.Editor shpEditor;
+
+    private RelativeLayout trans_overlay;
+    private RelativeLayout rlHome;
+    private LinearLayout llOverlay1;
+    private LinearLayout llOverlay2;
+    private LinearLayout llOverlay3;
+    private TextView tvNext1;
+    private TextView tvNext2;
+    private TextView tvOK;
 
 
 
@@ -321,6 +332,61 @@ public class SwipeActivity extends AppCompatActivity {
                 });
             }
         });
+
+        trans_overlay = (RelativeLayout) findViewById(R.id.trans_overlay);
+        rlHome = (RelativeLayout) findViewById(R.id.rlHome);
+        llOverlay1 = (LinearLayout) findViewById(R.id.llOverlay1);
+        llOverlay2 = (LinearLayout) findViewById(R.id.llOverlay2);
+        llOverlay3 = (LinearLayout) findViewById(R.id.llOverlay3);
+        tvNext1 = (TextView) findViewById(R.id.tvNext1);
+        tvNext1.setOnClickListener(this);
+        tvNext2 = (TextView) findViewById(R.id.tvNext2);
+        tvNext2.setOnClickListener(this);
+        tvOK = (TextView) findViewById(R.id.tvOK);
+        tvOK.setOnClickListener(this);
+        if(isFirstTime()){
+            trans_overlay.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.tvNext1:
+                llOverlay1.setVisibility(View.GONE);
+                tvNext1.setVisibility(View.GONE);
+                llOverlay2.setVisibility(View.VISIBLE);
+                tvNext2.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tvNext2:
+                llOverlay2.setVisibility(View.GONE);
+                tvNext2.setVisibility(View.GONE);
+                llOverlay3.setVisibility(View.VISIBLE);
+                tvOK.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tvOK:
+                trans_overlay.setVisibility(View.GONE);
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private boolean isFirstTime()
+    {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+            trans_overlay.setVisibility(View.VISIBLE);
+
+        }
+        return ranBefore;
 
     }
 

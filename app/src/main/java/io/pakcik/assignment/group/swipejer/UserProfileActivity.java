@@ -92,7 +92,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 Log.d("User phone number: " ,  String.valueOf(cursor.getString(5)));
                 Log.d("User location: " ,  String.valueOf(cursor.getString(6)));
 
-
+                TV_username.setText(String.valueOf(cursor.getString(1)));
                 TV_Gender.setText(String.valueOf(cursor.getString(4)));
                 TV_phoneNumber.setText(String.valueOf(cursor.getString(5)));
                 TV_location.setText(String.valueOf(cursor.getString(6)));

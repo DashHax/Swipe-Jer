@@ -1,10 +1,13 @@
 package io.pakcik.assignment.group.swipejer;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -23,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -31,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class SettingScreen extends AppCompatActivity implements AdapterView.OnItemClickListener  {
 
@@ -118,21 +123,42 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
             startActivity(intent);
         }
         else if(position==6){
-            SettingScreen.sqLiteHelper.queryData("DELETE FROM USERS where id == " + user_id);
-            SettingScreen.sqLiteHelper.queryData("DELETE FROM PRODUCT where userID == " + Integer.parseInt(user_id));
 
-            if (shp == null)
-                shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            shpEditor = shp.edit();
-            shpEditor.putString("name", "");
-            shpEditor.putString("id", "");
-            shpEditor.putString("email", "");
-            shpEditor.putString("username", "");
-            shpEditor.putString("password", "");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Delete Account!");
+            builder.setMessage("Are you sure you want to delete your account?");
+            builder.setPositiveButton("Confirm",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SettingScreen.sqLiteHelper.queryData("DELETE FROM users WHERE id = '" + user_id+"'");
+                            SettingScreen.sqLiteHelper.queryData("DELETE FROM PRODUCT WHERE userID = '" + Integer.parseInt(user_id) +"'");
 
-            shpEditor.commit();
-            Intent intent = new Intent(SettingScreen.this, LoginActivity.class);
-            startActivity(intent);
+                            if (shp == null)
+                                shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            shpEditor = shp.edit();
+                            shpEditor.putString("name", "");
+                            shpEditor.putString("id", "");
+                            shpEditor.putString("email", "");
+                            shpEditor.putString("username", "");
+                            shpEditor.putString("password", "");
+
+                            shpEditor.commit();
+                            Intent intent = new Intent(SettingScreen.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
         }
     }
 

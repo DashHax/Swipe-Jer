@@ -12,14 +12,14 @@
         android:id="@+id/imageView3"
         android:layout_width="136dp"
         android:layout_height="109dp"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="288dp"
         android:contentDescription="logo Swipe Jer"
         android:src="@drawable/logo_small3"
 
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -36,7 +36,8 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.008" />
 </androidx.constraintlayout.widget.ConstraintLayout>
