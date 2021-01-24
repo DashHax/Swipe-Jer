@@ -7,6 +7,53 @@
     android:background="#9CE2D4"
     tools:context=".UserProfileActivity">
 
+    <LinearLayout
+        android:id="@+id/llBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:contentDescription="Back button"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+        <Button
+            android:id="@+id/swipe_jer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="12"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/pacifico"
+            android:text="Swipe-Jer"
+            android:textAllCaps="false"
+            android:textColor="@color/colorFont"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="Chat button"
+            app:srcCompat="@drawable/ic_chat" />
+    </LinearLayout>
+
     <RatingBar
         android:id="@+id/simpleRatingBar"
         android:layout_width="wrap_content"
@@ -50,8 +97,11 @@
         android:layout_marginTop="16dp"
         android:elevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swipe_jer"
         app:srcCompat="@drawable/def_profile_pic"
+
+        app:layout_constraintTop_toBottomOf="@+id/llBar"
+
+
 
         />
 
@@ -139,31 +189,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/swipe_jer"
-        android:layout_width="121dp"
-        android:layout_height="41dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_weight="12"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:fontFamily="@font/pacifico"
-        android:text="Swipe-Jer"
-        android:textAllCaps="false"
-        android:textColor="@color/colorFont"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-         />
 
     <TextView
         android:id="@+id/TV_phoneNumber2"
@@ -257,29 +282,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TV_Gender"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="35dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Back button"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24"/>
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="41dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Chat button"
-        app:srcCompat="@drawable/ic_chat"
-
-        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

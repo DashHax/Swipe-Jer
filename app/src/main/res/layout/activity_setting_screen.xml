@@ -10,8 +10,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -21,8 +21,9 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="3dp"
+            android:padding="7dp"
             android:scaleType="fitCenter"
+            android:layout_gravity="left"
             app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
         <Button
@@ -44,7 +45,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="3dp"
+            android:padding="7dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_chat" />
 

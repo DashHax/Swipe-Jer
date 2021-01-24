@@ -4,63 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_interest"
     tools:context=".interestScreen">
-
-    <ImageButton
-        android:id="@+id/btnProfile"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="3dp"
-        android:scaleType="fitCenter"
+        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_profile" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            app:srcCompat="@drawable/ic_profile" />
 
-    <Button
-        android:id="@+id/btnSwipeJer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_weight="12"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:fontFamily="@font/pacifico"
-        android:text="Swipe-Jer"
-        android:textAllCaps="false"
-        android:textColor="@color/colorFont"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/btnChatbox"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toEndOf="@+id/btnProfile"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnSwipeJer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="12"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/pacifico"
+            android:text="Swipe-Jer"
+            android:textAllCaps="false"
+            android:textColor="@color/colorFont"
+            android:textSize="24sp" />
 
-    <ImageButton
-        android:id="@+id/btnChatbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="324dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="324dp"
-        android:layout_marginTop="4dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_chat" />
+        <ImageButton
+            android:id="@+id/btnChatbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_chat" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editText"
@@ -80,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSwipeJer" />
+        app:layout_constraintTop_toBottomOf="@+id/llBar" />
 
     <Button
         android:id="@+id/menfashion"

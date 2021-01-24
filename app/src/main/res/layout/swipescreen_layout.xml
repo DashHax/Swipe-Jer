@@ -6,142 +6,230 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".MainActivity">
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rlHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight="10"
-        android:orientation="horizontal"
-        android:layout_alignParentLeft="true">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true">
 
-        <ImageButton
-            android:id="@+id/btnProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="3dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_profile" />
+            <ImageButton
+                android:id="@+id/btnProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="7dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_profile" />
 
-        <Button
-            android:id="@+id/btnSwipeJer"
+            <Button
+                android:id="@+id/btnSwipeJer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:fontFamily="@font/pacifico"
+                android:text="Swipe-Jer"
+                android:textAllCaps="false"
+                android:textColor="@color/colorFont"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/btnGoToChatbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="7dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_chat" />
+
+        </LinearLayout>
+
+        <com.lorentzos.flingswipe.SwipeFlingAdapterView
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:rotation_degrees="15.5"
+            android:layout_alignParentLeft="true" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="420dp"
+            android:layout_height="170dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/corner"
+            tools:ignore="RtlCompat" />
+
+
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="12"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:fontFamily="@font/pacifico"
-            android:text="Swipe-Jer"
-            android:textAllCaps="false"
-            android:textColor="@color/colorFont"
-            android:textSize="24sp" />
+
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="118dp"
+            android:text="IPhone 12 Pro Max"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="89dp"
+            android:text="RM 4999.00"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/btnGoToChatbox"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:id="@+id/btnCanel"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="19dp"
+            android:layout_toStartOf="@+id/textView3"
+            android:elevation="2dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="3dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_chat" />
+            app:srcCompat="@drawable/cancel"
+            android:layout_toLeftOf="@+id/textView3" />
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_alignTop="@+id/btnCanel"
+            android:layout_marginStart="-2dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/back"
+            android:layout_marginLeft="-2dp"
+            android:elevation="2dp"
+            android:layout_alignLeft="@+id/textView3" />
 
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
-        android:id="@+id/frame"
+        <ImageButton
+            android:id="@+id/btnHear"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignTop="@+id/btnCanel"
+            android:layout_toEndOf="@+id/btnBack"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/heart"
+            android:elevation="2dp"
+            android:layout_toRightOf="@+id/btnBack" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/trans_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:rotation_degrees="15.5"
-        android:layout_alignParentLeft="true" />
+        android:background="@drawable/img_transparent_bg">
 
+        <LinearLayout
+            android:id="@+id/llOverlay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_overlay1arrow1">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="420dp"
-        android:layout_height="170dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/corner"
-        tools:ignore="RtlCompat" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llOverlay2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/ic_overlay1arrow2">
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llOverlay3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/ic_overlay1arrow3">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        </LinearLayout>
 
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="118dp"
-        android:text="IPhone 12 Pro Max"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvNext1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:shadowColor="@android:color/background_dark"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="89dp"
-        android:text="RM 4999.00"
-        android:textColor="#000000"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvNext2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:shadowColor="@android:color/background_dark"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-    <ImageButton
-        android:id="@+id/btnCanel"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="19dp"
-        android:layout_toStartOf="@+id/textView3"
-        android:elevation="2dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="3dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/cancel"
-        android:layout_toLeftOf="@+id/textView3" />
+        <TextView
+            android:id="@+id/tvOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:shadowColor="@android:color/background_dark"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text="Ok"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_alignTop="@+id/btnCanel"
-        android:layout_marginStart="-2dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="3dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/back"
-        android:layout_marginLeft="-2dp"
-        android:elevation="2dp"
-        android:layout_alignLeft="@+id/textView3" />
-
-    <ImageButton
-        android:id="@+id/btnHear"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignTop="@+id/btnCanel"
-        android:layout_toEndOf="@+id/btnBack"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="3dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/heart"
-        android:elevation="2dp"
-        android:layout_toRightOf="@+id/btnBack" />
-
+    </RelativeLayout>
 </RelativeLayout>
