@@ -40,7 +40,7 @@ import java.util.Set;
 public class SettingScreen extends AppCompatActivity implements AdapterView.OnItemClickListener  {
 
     ArrayList<String> listArray = new ArrayList<String>(Arrays.asList("Change Username","Change Password"
-            ,"Change Location","About","Contact Us","Rate Us","Delete Account"));
+            ,"Change Location","Change Gender","About","Contact Us","Rate Us","Delete Account"));
 
     SharedPreferences shp;
     SharedPreferences.Editor shpEditor;
@@ -111,18 +111,22 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
             startActivity(intent);
         }
         else if(position==3){
-            Intent intent = new Intent(SettingScreen.this, PopAbout.class);
+            Intent intent = new Intent(SettingScreen.this, PopGender.class);
             startActivity(intent);
         }
         else if(position==4){
-            Intent intent = new Intent(SettingScreen.this, PopContactUs.class);
+            Intent intent = new Intent(SettingScreen.this, PopAbout.class);
             startActivity(intent);
         }
         else if(position==5){
-            Intent intent = new Intent(SettingScreen.this, PopRateUs.class);
+            Intent intent = new Intent(SettingScreen.this, PopContactUs.class);
             startActivity(intent);
         }
         else if(position==6){
+            Intent intent = new Intent(SettingScreen.this, PopRateUs.class);
+            startActivity(intent);
+        }
+        else if(position==7){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);

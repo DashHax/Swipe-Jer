@@ -91,6 +91,8 @@
             android:theme="@style/AppTheme.PopTheme"></activity>
         <activity android:name=".PopAbout"
             android:theme="@style/AppTheme.PopTheme"></activity>
+        <activity android:name=".PopGender"
+            android:theme="@style/AppTheme.PopTheme"></activity>
     </application>
 
 </manifest>
