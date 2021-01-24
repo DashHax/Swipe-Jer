@@ -56,8 +56,6 @@ public class ChangePassword extends AppCompatActivity {
                         if(etConfirmPass.getText().toString().equals(etNewPass.getText().toString())){
                             ChangePassword.sqLiteHelper.queryData("UPDATE USERS SET password = '"+ etNewPass.getText().toString() +"' where id = " + user_id);
                             Toast.makeText(getApplicationContext(), "You have change your password!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(ChangePassword.this, SettingScreen.class);
-                            startActivity(intent);
                         }
                         else{
                             Toast.makeText(getApplicationContext(), "Make sure password is same!", Toast.LENGTH_SHORT).show();

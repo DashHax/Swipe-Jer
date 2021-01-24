@@ -52,8 +52,6 @@ public class ChangeUsername extends AppCompatActivity {
                 while (cursor.moveToNext()) {
                     ChangeUsername.sqLiteHelper.queryData("UPDATE USERS SET username = '" + etNewUsername.getText().toString() + "' where id = " + user_id);
                     Toast.makeText(getApplicationContext(), "You have change your username!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ChangeUsername.this, SettingScreen.class);
-                    startActivity(intent);
                 }
             }
         });
