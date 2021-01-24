@@ -159,6 +159,9 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
             try{
                 sqLiteHelper.deleteData(itemID);
+                Toast.makeText(getApplicationContext(), "Deleted successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(editListing.this,UserProfileActivity.class);
+                startActivity(intent);
             }catch (Exception e){
                 e.printStackTrace();
             }
