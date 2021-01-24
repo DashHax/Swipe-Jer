@@ -88,6 +88,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         statement.bindString(4, description);
         statement.bindString(5, category);
         statement.bindBlob(6, image);
+        statement.bindDouble(7,id);
 
         statement.execute();
         database.close();
@@ -197,10 +198,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_TABLE_USERS);
 
         sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'aminhakim' , 'a@a.com' ,  '1234qwer' , 'Male' , '0122031134' , 'Shah Alam' );");
-        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'senoi' , 'senoi@topglove.com' ,  '1234qwer' , '' , '' , '' );");
-        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'odell' , 'odell@ivis.com' ,  '1234qwer' , '' , '' , '' );");
-        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'aqiff' , 'aqiff@tnb.com' ,  '1234qwer' , '' , '' , '' );");
-        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'fawzcopter' , 'fawz@fuzzyzadeh.com' ,  '1234qwer' , '' , '' , '' );");
+        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'senoi' , 'senoi@topglove.com' ,  '1234qwer' , 'Male' , '0133031134' , 'Klang' );");
+        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'odell' , 'odell@ivis.com' ,  '1234qwer' , 'Female' , '0122032351' , 'Sabah' );");
+        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'aqiff' , 'aqiff@tnb.com' ,  '1234qwer' , 'Female' , '0172526134' , 'KL' );");
+        sqLiteDatabase.execSQL("INSERT INTO "+ TABLE_USERS  + " VALUES(null, 'fawzcopter' , 'fawz@fuzzyzadeh.com' ,  '1234qwer' , 'Male' , '0122012134' , 'Tokyo, Japan' );");
 
     }
 

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,20 +31,20 @@ import androidx.core.app.ActivityCompat;
 
 public class editListing  extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     EditText itemName, itemPrice, itemDesc;
-    int userID;
     String category="";
     Button updateBtn, deleteBtn;
     ImageView itemView1;
     final int REQUEST_CODE_GALLERY = 999;
     SharedPreferences shp;
     public static SQLiteHelper sqLiteHelper;
+    private String query;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editlisting);
         Intent _int = getIntent();
         String item_ID  = _int.getStringExtra("id");
-        Log.d("CURRENT ID", item_ID);
+        final int itemID = Integer.parseInt(item_ID);
 
 
         final Spinner spinner = findViewById(R.id.spinner1);
@@ -75,10 +76,48 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
 
         String user_id = shp.getString("id", "");
         final int userid = Integer.parseInt(user_id);
+
+        query = "SELECT * FROM product WHERE id = "+item_ID+";";
+
+
+        Cursor cursor = editListing.sqLiteHelper.getData(query);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(2);
+            String price = cursor.getString(3);
+            String description = cursor.getString(4);
+            String category = cursor.getString(5);
+            byte[] image = cursor.getBlob(6);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            itemName.setText(name.toString());
+            itemPrice.setText(price.toString());
+            if (category.equals("Men Fashion")){
+                int pos =0;
+                spinner.setSelection(pos);
+            }
+            else if (category.equals("Women Fashion")){
+                int pos =1;
+                spinner.setSelection(pos);
+            }
+            else if (category.equals("Electronics")){
+                int pos =2;
+                spinner.setSelection(pos);
+            }
+            else{
+                int pos=3;
+                spinner.setSelection(pos);
+            }
+            itemDesc.setText(description.toString());
+            itemView1.setImageBitmap(bitmap);
+
+        }
+
+
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
+                    Log.d("",itemName.getText().toString());
                     sqLiteHelper.updateData(
                             userid,
                             itemName.getText().toString().trim(),
@@ -86,13 +125,9 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
                             itemDesc.getText().toString().trim(),
                             category,
                             imageViewToByte(itemView1),
-                            1
+                            itemID
                     );
-                    Toast.makeText(getApplicationContext(), "Added successfully!", Toast.LENGTH_SHORT).show();
-                    itemName.setText("");
-                    itemPrice.setText("");
-                    itemDesc.setText("");
-                    itemView1.setImageResource(R.drawable.additem);
+                    Toast.makeText(getApplicationContext(), "Updated successfully!", Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e){
                     e.printStackTrace();
@@ -122,7 +157,11 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void onClick(View v) {
-
+            try{
+                sqLiteHelper.deleteData(itemID);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             }
         });
     }

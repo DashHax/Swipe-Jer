@@ -2,7 +2,9 @@ package io.pakcik.assignment.group.swipejer;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -10,6 +12,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +36,13 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
 
     ArrayList<String> listArray = new ArrayList<String>(Arrays.asList("Change Username","Change Password"
             ,"Change Location","About","Contact Us","Rate Us","Delete Account"));
+
+    SharedPreferences shp;
+    SharedPreferences.Editor shpEditor;
+    private static SQLiteHelper sqLiteHelper;
+
+    String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +81,13 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
+        sqLiteHelper = new SQLiteHelper(this, Config.DBName, null, 1);
+        if (shp == null)
+            shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        user_id = shp.getString("id", "");
+
+
 
     }
 
@@ -101,7 +118,20 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
             startActivity(intent);
         }
         else if(position==6){
-            Intent intent = new Intent(SettingScreen.this, SwipeActivity.class);
+            SettingScreen.sqLiteHelper.queryData("DELETE FROM USERS where id == " + user_id);
+            SettingScreen.sqLiteHelper.queryData("DELETE FROM PRODUCT where userID == " + Integer.parseInt(user_id));
+
+            if (shp == null)
+                shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            shpEditor = shp.edit();
+            shpEditor.putString("name", "");
+            shpEditor.putString("id", "");
+            shpEditor.putString("email", "");
+            shpEditor.putString("username", "");
+            shpEditor.putString("password", "");
+
+            shpEditor.commit();
+            Intent intent = new Intent(SettingScreen.this, LoginActivity.class);
             startActivity(intent);
         }
     }
