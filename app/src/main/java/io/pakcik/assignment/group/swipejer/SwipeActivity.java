@@ -164,15 +164,31 @@ public class SwipeActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onRightCardExit(Object dataObject) {
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
-                String p_name = rowItems.get(0).getName();
-                int p_id = rowItems.get(0).getItemId();
-                String p_price = rowItems.get(0).getPrice();
-                int p_userid = rowItems.get(0).getUserId();
+                int idx = rowItems.size() - 1;
+                String p_name = rowItems.get(idx).getName();
+                int p_id = rowItems.get(idx).getItemId();
+                String p_price = rowItems.get(idx).getPrice();
+                int p_userid = rowItems.get(idx).getUserId();
                 intent.putExtra("page", "chatbox");
                 intent.putExtra("product_id", p_id);
                 intent.putExtra("product_name", p_name);
                 intent.putExtra("product_price", p_price);
                 intent.putExtra("seller_id", p_userid);
+
+                StringBuilder strRowItems;
+
+                for (int i = 0, len = rowItems.size(); i < len; i++) {
+                    strRowItems = new StringBuilder();
+                    strRowItems.append(i);
+                    strRowItems.append(":: id=");
+                    strRowItems.append(rowItems.get(i).getItemId());
+                    strRowItems.append("name=");
+                    strRowItems.append(rowItems.get(i).getName());
+                    Log.d("item", strRowItems.toString());
+                }
+
+                Log.d("selected", "id=" + String.valueOf(p_id) + " name=" + p_name);
+
                 startActivity(intent);
 //                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
             }
@@ -242,10 +258,11 @@ public class SwipeActivity extends AppCompatActivity implements View.OnClickList
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String p_name = rowItems.get(0).getName();
-                int p_id = rowItems.get(0).getItemId();
-                String p_price = rowItems.get(0).getPrice();
-                int p_userid = rowItems.get(0).getUserId();
+                int idx = rowItems.size() - 1;
+                String p_name = rowItems.get(idx).getName();
+                int p_id = rowItems.get(idx).getItemId();
+                String p_price = rowItems.get(idx).getPrice();
+                int p_userid = rowItems.get(idx).getUserId();
 
                 Intent intent = new Intent(getApplicationContext(), Chat.class);
                 intent.putExtra("page", "chatbox");
@@ -253,6 +270,21 @@ public class SwipeActivity extends AppCompatActivity implements View.OnClickList
                 intent.putExtra("product_name", p_name);
                 intent.putExtra("product_price", p_price);
                 intent.putExtra("seller_id", p_userid);
+
+                StringBuilder strRowItems;
+
+                for (int i = 0, len = rowItems.size(); i < len; i++) {
+                    strRowItems = new StringBuilder();
+                    strRowItems.append(i);
+                    strRowItems.append(":: id=");
+                    strRowItems.append(rowItems.get(i).getItemId());
+                    strRowItems.append("name=");
+                    strRowItems.append(rowItems.get(i).getName());
+                    Log.d("item", strRowItems.toString());
+                }
+
+                Log.d("selected", "id=" + String.valueOf(p_id) + " name=" + p_name);
+
                 startActivity(intent);
             }
         });
