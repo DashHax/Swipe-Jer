@@ -1,16 +1,22 @@
 package io.pakcik.assignment.group.swipejer;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,6 +102,12 @@ public class ChatJsBinding {
         } else {
             return "{ \"status\":\"notfound\" }";
         }
+    }
+
+    @JavascriptInterface
+    public void StartCamera() {
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        self.startActivityForResult(camera, 888);
     }
 
     @JavascriptInterface

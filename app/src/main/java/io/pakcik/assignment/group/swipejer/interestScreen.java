@@ -1,7 +1,9 @@
 package io.pakcik.assignment.group.swipejer;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class interestScreen extends AppCompatActivity {
     private static SQLiteHelper sqLiteHelper;
@@ -30,10 +34,17 @@ public class interestScreen extends AppCompatActivity {
     private PopupMenu mPopupMenu;
     SharedPreferences.Editor shpEditor;
 
+    private void CameraPermission() {
+
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interestscreen);
+
 
         InitDatabase();
 
