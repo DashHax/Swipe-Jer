@@ -29,13 +29,13 @@ public class arrayAdapter extends ArrayAdapter<cards>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.name);
+//        TextView name = (TextView) convertView.findViewById(R.id.name);
         ImageView image = (ImageView) convertView.findViewById(R.id.image);
 
 
-        name.setText(card_item.getName());
-        byte[] foodImage = card_item.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
+//        name.setText(card_item.getName());
+        byte[] productImage = card_item.getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(productImage, 0, productImage.length);
         image.setImageBitmap(bitmap);
 
 

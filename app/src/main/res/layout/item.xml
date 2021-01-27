@@ -28,15 +28,6 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/name"
-                android:textSize="30sp"
-                android:paddingLeft="20sp"
-                android:textColor="@android:color/black"
-                android:gravity="center|left"
-                tools:text="hello"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
