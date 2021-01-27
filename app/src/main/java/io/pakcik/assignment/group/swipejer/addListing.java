@@ -87,6 +87,7 @@ public class addListing  extends AppCompatActivity implements AdapterView.OnItem
                     itemView1.setImageResource(R.drawable.additem);
                 }
                 catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Item could not be added!", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
