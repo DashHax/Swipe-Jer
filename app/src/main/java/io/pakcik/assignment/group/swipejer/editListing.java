@@ -130,6 +130,7 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(getApplicationContext(), "Updated successfully!", Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Error in updating the product", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -163,6 +164,7 @@ public class editListing  extends AppCompatActivity implements AdapterView.OnIte
                 Intent intent = new Intent(editListing.this,UserProfileActivity.class);
                 startActivity(intent);
             }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "Error in deleting the product", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             }
